@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">All Movies</h2>
+
+<div class="row">
+  {% for m in movies %}
+  <div class="col-md-4 mb-3">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">{{ m.MovieTitle }} ({{ m.ReleaseYear }})</h5>
+        <p class="card-text"><strong>Genre:</strong> {{ m.get_MovieGenre_display }}</p>
+        <p class="card-text"><strong>Actors:</strong> {{ m.Actor1Name }}{% if m.Actor2Name %}, {{ m.Actor2Name }}{% endif %}</p>
+        <p class="card-text"><strong>Director:</strong> {{ m.DirectorName }}</p>
+      </div>
+      <div class="card-footer text-center">
+        <a class="btn btn-sm btn-primary me-1" href="{% url 'movie_detail' m.pk %}">View</a>
+        <a class="btn btn-sm btn-warning me-1" href="{% url 'movie_update' m.pk %}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'movie_delete' m.pk %}">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>No movies available.</p>
+  {% endfor %}
+</div>
+{% endblock %}
