@@ -1,0 +1,30 @@
+pipeline {
+agent any
+stages {
+stage('Checkout') {
+steps {
+cleanWs()
+git(
+branch 'master',
+url 'httpsgithub.comKhaledKanawatiEECE430HW.git'
+)
+}
+}
+stage('Build Docker Image') {
+steps {
+bat 'docker build -t my-django-applatest .'
+}
+}
+stage('Stop Old Container') {
+steps {
+bat 'docker stop my-django-app  exit 0'
+bat 'docker rm my-django-app  exit 0'
+}
+}
+stage('Run New Container') {
+steps {
+bat 'docker run -d --name my-django-app -p 80008000 my-django-applatest'
+}
+}
+}
+}
