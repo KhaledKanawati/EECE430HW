@@ -7,7 +7,7 @@ pollSCM('H/2 * * * *')
 stages {
 stage('Checkout') {
 steps {
-git branch: 'main', url:  'https://github.com/KhaledKanawati/EECE430HW.git'
+git branch: 'master', url:  'https://github.com/KhaledKanawati/EECE430HW.git'
 }
 }
 stage('Build in Minikube Docker') {
